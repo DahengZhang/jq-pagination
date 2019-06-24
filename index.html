@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./bootstrap.css">
+</head>
+
+<body>
+    <nav id="pagination-one">
+    </nav>
+    <script src="./jquery-1.10.2.min.js"></script>
+    <script src="./bootstrap.min.js"></script>
+    <script src="./pagination.js"></script>
+    <script>
+        pagination({el: document.getElementById('pagination-one'), page: 1, total: 0}, function(e) {
+            console.log('当前页面', e)
+        })
+    </script>
+</body>
+
+</html>
