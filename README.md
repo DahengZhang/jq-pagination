@@ -2,7 +2,7 @@
 
 引入 pagination.js 文件
 
-在获取借口，并计算好总也码数和当前也码数后，调用
+在获取接口，并计算好总也码数和当前也码数后，调用
 
 ```
 pagination({el: document.getElementById('pagination-one'), page: 1, total: 0}, function(e) {
