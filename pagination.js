@@ -1,13 +1,11 @@
 function pagination(option, cb) {
-    var el = typeof option.el === 'string' ? document.getElementById(option.el) : option.el;
+    var el = typeof option.el === 'string' ? document.querySelector(option.el) : option.el;
     var template = [];
     var nowPage = Number(option.page) || 1;
     var totalPage = Number(option.total) || 1;
 
-    (function init() {
-        createPageBtns();
-        addEvent();
-    })();
+    createPageBtns();
+    addEvent();
 
     function createPageBtns() {
         template = ['<ul class="pagination justify-content-end">']
@@ -60,8 +58,8 @@ function pagination(option, cb) {
     function addEvent() {
         el.addEventListener('click', e => {
             e.preventDefault();
-            if (e.target.classList.contains('disabled')) {
-                // 如果是 disabled 状态，则不进行任何操作
+            if (!e.target.classList.contains('page-link')) {
+                // 如果被点击的元素不是page-link，则不进行任何操作
                 return;
             }
             if (e.target.innerText === '«') {

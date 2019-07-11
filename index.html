@@ -10,15 +10,21 @@
 </head>
 
 <body>
+    <input type="text" id="total-number">
     <nav id="pagination-one">
     </nav>
     <script src="./jquery-1.10.2.min.js"></script>
     <script src="./bootstrap.min.js"></script>
     <script src="./pagination.js"></script>
     <script>
-        pagination({el: document.getElementById('pagination-one'), page: 1, total: 0}, function(e) {
-            console.log('当前页面', e)
+        document.querySelector('#total-number').addEventListener('blur', e => {
+            iniPage(2, Number(e.target.value) || 8)
         })
+        function iniPage(page, total) {
+            pagination({el: document.getElementById('pagination-one'), page, total}, function(e) {
+                console.log('当前页面', e)
+            })
+        }
     </script>
 </body>
 

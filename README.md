@@ -12,7 +12,7 @@ pagination({el: document.getElementById('pagination-one'), page: 1, total: 0}, f
 
 ```
 {
-  el: document.getElementById('pagination-one'), // 传入 dom 元素或者挂在点 id(string类型)
+  el: document.getElementById('pagination-one'), // 传入 dom 元素或者 #id .class等
   page: 1, // 当前页码数
   total: 0 // 总页码数
 }
