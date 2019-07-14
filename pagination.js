@@ -5,7 +5,7 @@ function pagination(option, cb) {
     var totalPage = Number(option.total) || 1;
 
     createPageBtns();
-    addEvent();
+    el.addEventListener('click', eventFunc);
 
     function createPageBtns() {
         template = ['<ul class="pagination justify-content-end">']
@@ -55,21 +55,19 @@ function pagination(option, cb) {
         el.innerHTML = template.join('');
     }
     
-    function addEvent() {
-        el.addEventListener('click', e => {
-            e.preventDefault();
-            if (!e.target.classList.contains('page-link')) {
-                // 如果被点击的元素不是page-link，则不进行任何操作
-                return;
-            }
-            if (e.target.innerText === '«') {
-                previous();
-            } else if (e.target.innerText === '»') {
-                next();
-            } else {
-                page(Number(e.target.innerText));
-            }
-        });
+    function eventFunc(e) {
+        e.preventDefault();
+        if (!e.target.classList.contains('page-link')) {
+            // 如果被点击的元素不是page-link，则不进行任何操作
+            return;
+        }
+        if (e.target.innerText === '«') {
+            previous();
+        } else if (e.target.innerText === '»') {
+            next();
+        } else {
+            page(Number(e.target.innerText));
+        }
     }
     function previous() {
         if (nowPage <= 1) {
