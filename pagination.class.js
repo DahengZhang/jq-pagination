@@ -29,6 +29,8 @@ var Pagination = /** @class */ (function () {
         this.refreshDom({ page: this.page, total: this.total });
     }
     Pagination.prototype.refreshDom = function (option) {
+        if (option.page === this.page && (!option.total || option.total === this.total))
+            return;
         option.page ? (this.page = option.page) : (option.page = this.page);
         option.total ? (this.total = option.total) : (option.total = this.total);
         var template = ['<ul class="pagination justify-content-end">'];

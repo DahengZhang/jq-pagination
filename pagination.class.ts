@@ -1,6 +1,6 @@
 interface InitOption {
     page: number
-    total: number
+    total?: number
 }
 
 interface BtnOption {
