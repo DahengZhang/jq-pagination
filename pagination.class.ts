@@ -1,8 +1,3 @@
-interface InitOption {
-    page: number
-    total?: number
-}
-
 interface BtnOption {
     page: number|string
     disabled: boolean
@@ -20,64 +15,69 @@ class Pagination {
         this.callBack = option.cb
 
         this.el.addEventListener('click', this.addEvent)
-        this.refreshDom({page: this.page, total: this.total})
+        this.refreshDom({page: this.page, total: this.total, enforce: true})
     }
 
-    refreshDom(option: InitOption) {
-        option.page ? (this.page = option.page) : (option.page = this.page)
-        option.total ? (this.total = option.total) : (option.total = this.total)
+    refreshDom({page = this.page, total = this.total, enforce = false}) {
+
+        if (!enforce && page === this.page && total === this.total) {
+            return
+        }
+
+        this.page = page
+        this.total = total
 
         let template: Array<string> = ['<ul class="pagination justify-content-end">']
-        template.push(option.page === 1
+        template.push(page === 1
             ? this.createBtn({page: '&laquo;', disabled: true})
             : this.createBtn({page: '&laquo;', disabled: false}))
         let pages: Array<number|string> = [1]
 
-        if (option.total <= 7) {
-            for (var i = 2; i <= option.total; i++) {
+        if (total <= 7) {
+            for (var i = 2; i <= total; i++) {
                 pages.push(i);
             }
         } else {
-            if (option.page > 4) {
+            if (page > 4) {
                 pages.push('...')
             }
-            let startPage: number = option.page - 1
-            let endPage: number = option.page + 1
+            let startPage: number = page - 1
+            let endPage: number = page + 1
 
-            if (option.page < 5) {
+            if (page < 5) {
                 startPage = 1
                 endPage = 5
             }
 
-            if (option.page > option.total - 4) {
-                startPage = option.total - 4
-                endPage = option.total
+            if (page > total - 4) {
+                startPage = total - 4
+                endPage = total
             }
 
             for (let i:number = startPage; i <= endPage; i++) {
                 if (i <= 1) {
                     continue
                 }
-                if (i >= option.total) {
+                if (i >= total) {
                     continue
                 }
                 pages.push(i)
             }
 
-            if (option.page <= option.total - 4) {
+            if (page <= total - 4) {
                 pages.push('...')
             }
-            pages.push(option.total)
+            pages.push(total)
         }
 
         for (var i = 0; i < pages.length; i++) {
             template.push(this.createBtn({
                 page: pages[i],
-                disabled: pages[i] === option.page || typeof pages[i] === 'string'
+                disabled: pages[i] === page || typeof pages[i] === 'string'
             }))
         }
         template = template.concat(
-            option.page === option.total
+            page === total
                             ? this.createBtn({page: '&raquo;', disabled: true})
                             : this.createBtn({page: '&raquo;', disabled: false}),
             '</ul>')

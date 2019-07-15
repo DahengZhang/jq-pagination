@@ -1,19 +1,21 @@
 # jq-pagination
 
-引入 pagination.js 文件
+引入 pagination.class.js 文件
 
-在获取接口，并计算好总页码数和当前码数后，调用
+页面初始化时调用
 
 ```
-pagination({el: document.getElementById('pagination-one'), page: 1, total: 0}, function(e) {
-    console.log('当前页面', e)
-})
+const p = new Pagination({el: '#pagination-one', cb: function(p) {
+    // 用户切换页面时触发
+    console.log('当前页面', p)
+}})
 ```
 
 ```
 {
   el: document.getElementById('pagination-one'), // 传入 dom 元素或者 #id .class等
-  page: 1, // 当前页码数
-  total: 0 // 总页码数
+  page: 1, // 当前页码数，默认为1
+  total: 1, // 总页码数，默认为1
+  cb: function() {} // 页面切换触发的回掉函数
 }
 ```

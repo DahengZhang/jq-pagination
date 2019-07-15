@@ -20,9 +20,11 @@
         const changePage = function (p) {
             console.log(p)
         }
-        const p = new Pagination({el: '#pagination-one', total: 8, cb: changePage})
+        const p = new Pagination({el: '#pagination-one', cb: function(p) {
+            console.log('当前页面', p)
+        }})
         document.querySelector('#total-number').addEventListener('blur', e => {
-            p.refreshDom({page: 4})
+            p.refreshDom({total: 9})
         })
     </script>
 </body>

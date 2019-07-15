@@ -26,58 +26,60 @@ var Pagination = /** @class */ (function () {
         this.total = option.total || 1;
         this.callBack = option.cb;
         this.el.addEventListener('click', this.addEvent);
-        this.refreshDom({ page: this.page, total: this.total });
+        this.refreshDom({ page: this.page, total: this.total, enforce: true });
     }
-    Pagination.prototype.refreshDom = function (option) {
-        if (option.page === this.page && (!option.total || option.total === this.total))
+    Pagination.prototype.refreshDom = function (_a) {
+        var _b = _a.page, page = _b === void 0 ? this.page : _b, _c = _a.total, total = _c === void 0 ? this.total : _c, _d = _a.enforce, enforce = _d === void 0 ? false : _d;
+        if (!enforce && page === this.page && total === this.total) {
             return;
-        option.page ? (this.page = option.page) : (option.page = this.page);
-        option.total ? (this.total = option.total) : (option.total = this.total);
+        }
+        this.page = page;
+        this.total = total;
         var template = ['<ul class="pagination justify-content-end">'];
-        template.push(option.page === 1
+        template.push(page === 1
             ? this.createBtn({ page: '&laquo;', disabled: true })
             : this.createBtn({ page: '&laquo;', disabled: false }));
         var pages = [1];
-        if (option.total <= 7) {
-            for (var i = 2; i <= option.total; i++) {
+        if (total <= 7) {
+            for (var i = 2; i <= total; i++) {
                 pages.push(i);
             }
         }
         else {
-            if (option.page > 4) {
+            if (page > 4) {
                 pages.push('...');
             }
-            var startPage = option.page - 1;
-            var endPage = option.page + 1;
-            if (option.page < 5) {
+            var startPage = page - 1;
+            var endPage = page + 1;
+            if (page < 5) {
                 startPage = 1;
                 endPage = 5;
             }
-            if (option.page > option.total - 4) {
-                startPage = option.total - 4;
-                endPage = option.total;
+            if (page > total - 4) {
+                startPage = total - 4;
+                endPage = total;
             }
             for (var i_1 = startPage; i_1 <= endPage; i_1++) {
                 if (i_1 <= 1) {
                     continue;
                 }
-                if (i_1 >= option.total) {
+                if (i_1 >= total) {
                     continue;
                 }
                 pages.push(i_1);
             }
-            if (option.page <= option.total - 4) {
+            if (page <= total - 4) {
                 pages.push('...');
             }
-            pages.push(option.total);
+            pages.push(total);
         }
         for (var i = 0; i < pages.length; i++) {
             template.push(this.createBtn({
                 page: pages[i],
-                disabled: pages[i] === option.page || typeof pages[i] === 'string'
+                disabled: pages[i] === page || typeof pages[i] === 'string'
             }));
         }
-        template = template.concat(option.page === option.total
+        template = template.concat(page === total
             ? this.createBtn({ page: '&raquo;', disabled: true })
             : this.createBtn({ page: '&raquo;', disabled: false }), '</ul>');
         this.el.innerHTML = template.join('');
