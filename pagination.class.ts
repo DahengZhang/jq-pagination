@@ -99,13 +99,13 @@ class Pagination {
         }
         if (e.target.innerText === '«') {
             // 点击前一页按钮
-            this.refreshDom({page: --this.page, total: this.total})
+            this.refreshDom({page: --this.page, enforce: true})
         } else if (e.target.innerText === '»') {
             // 点击后一页按钮
-            this.refreshDom({page: ++this.page, total: this.total})
+            this.refreshDom({page: ++this.page,  enforce: true})
         } else {
             // 点击页码按钮
-            this.refreshDom({page: Number(e.target.innerText), total: this.total})
+            this.refreshDom({page: Number(e.target.innerText),  enforce: true})
         }
         this.callBack(this.page)
     }

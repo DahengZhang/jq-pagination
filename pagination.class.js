@@ -9,15 +9,15 @@ var Pagination = /** @class */ (function () {
             }
             if (e.target.innerText === '«') {
                 // 点击前一页按钮
-                _this.refreshDom({ page: --_this.page, total: _this.total });
+                _this.refreshDom({ page: --_this.page, enforce: true });
             }
             else if (e.target.innerText === '»') {
                 // 点击后一页按钮
-                _this.refreshDom({ page: ++_this.page, total: _this.total });
+                _this.refreshDom({ page: ++_this.page, enforce: true });
             }
             else {
                 // 点击页码按钮
-                _this.refreshDom({ page: Number(e.target.innerText), total: _this.total });
+                _this.refreshDom({ page: Number(e.target.innerText), enforce: true });
             }
             _this.callBack(_this.page);
         };
