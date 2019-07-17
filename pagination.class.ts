@@ -1,6 +1,7 @@
 interface BtnOption {
     page: number|string
-    disabled: boolean
+    disabled?: boolean
+    selected?: boolean
 }
 
 class Pagination {
@@ -73,7 +74,8 @@ class Pagination {
         for (var i = 0; i < pages.length; i++) {
             template.push(this.createBtn({
                 page: pages[i],
-                disabled: pages[i] === page || typeof pages[i] === 'string'
+                disabled: pages[i] === page || typeof pages[i] === 'string',
+                selected: pages[i] === page
             }))
         }
         template = template.concat(

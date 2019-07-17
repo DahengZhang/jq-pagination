@@ -76,7 +76,8 @@ var Pagination = /** @class */ (function () {
         for (var i = 0; i < pages.length; i++) {
             template.push(this.createBtn({
                 page: pages[i],
-                disabled: pages[i] === page || typeof pages[i] === 'string'
+                disabled: pages[i] === page || typeof pages[i] === 'string',
+                selected: pages[i] === page
             }));
         }
         template = template.concat(page === total
